@@ -16,7 +16,7 @@ The folder named terraform provides the template to set up cloud infrastructure.
     aws_secret_access_key=1mSq9i0+Vcr...A/u
     aws_session_token=IQoJ/...=
   ```
-- step 2: terraform deployment
+- step 2: Run Terraform to set up cloud infrastructure.  It will access your local Docker daemon, so ensure it is turn on.
   ```
   cd ./aws.run/terraform
   terraform init
