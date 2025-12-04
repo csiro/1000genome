@@ -3,7 +3,8 @@ A Nextflow pipeline is proposed to Examine genomic variation across populations 
 
 ## AWS Cloud Infrasture
 The folder named terraform provides the template to set up cloud infrastructure. 
-- step 1: set up AWS cloud credential in your local PC. 
+- step 1: prequests
+  - set up AWS cloud credential in your local PC. 
   ```
   # eg. less ~/.aws/config 
   [default]
@@ -16,7 +17,10 @@ The folder named terraform provides the template to set up cloud infrastructure.
     aws_secret_access_key=1mSq9i0+Vcr...A/u
     aws_session_token=IQoJ/...=
   ```
+  - terraform state bucket has to be set up first refer to https://developer.hashicorp.com/terraform/language/backend/s3
+    
 - step 2: Run Terraform to set up cloud infrastructure.  It will access your local Docker daemon, so ensure it is turn on.
+  
   ```
   cd ./aws.run/terraform
   terraform init
