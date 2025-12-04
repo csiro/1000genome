@@ -20,7 +20,7 @@ resource "aws_batch_compute_environment" "fargate_environment" {
 }
 
 resource "aws_batch_compute_environment" "fargate_spot_environment" {
-  compute_environment_name = "fargate_spot_environment"
+  name = "fargate_spot_environment"
   type                     = "MANAGED"
   service_role             = aws_iam_role.batch_service_role.arn
   depends_on               = [aws_iam_role_policy_attachment.batch_service_policy_attachment]
