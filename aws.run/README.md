@@ -51,7 +51,7 @@ The folder named terraform provides the template to set up cloud infrastructure.
 	
   ```
 
-- step 3: now you can get aws resource through AWS console or terraform command. eg.
+- step 3: now you can get aws resource through AWS console or terraform command as step2 described. eg.
 	 - job_definition arn to launch docker container running PCA and bcftool, refer to "scripts/nextflow.config"
   	- name of your private bucket, job_queue and Nextflow head job_definition, refer to "submit.sh"
     
