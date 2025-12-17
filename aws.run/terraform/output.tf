@@ -8,17 +8,17 @@ output "job_queue" {
 }
 
 output "job_definition_nf" {
-  description = "The job difinition arn of nexflow head job"
+  description = "The job definition arn of nexflow head job"
   value       = module.job_definition_nf.job_id
 }
 
 output "job_definition_pca" {
-  description = "The job difinition arn of pca"
+  description = "The job definition arn of pca"
   value       = module.job_definition_pca.job_id
 }
 
 output "job_definition_bcftool" {
-  description = "The job difinition arn of bcftool"
+  description = "The job definition arn of bcftool"
   value       = module.job_definition_bcftool.job_id
 }
 
