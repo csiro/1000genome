@@ -11,6 +11,7 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = ">= 4.22.0"
+      # version = "~> 6.26.0"
     }
     docker = {
       source  = "kreuzwerker/docker"
