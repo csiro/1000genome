@@ -1,7 +1,11 @@
 scripts="./scripts"
-bucket="1000genome-d0aqs32v"
-job_queue="fargate_job_queue"
 job_name="1000genome-test"
+
+# update aws resource information refer to terraform output
+bucket="1000genome-wruhmmui"
+job_queue="fargate_job_queue"
+
+# only add nextflow head job definition name here
 job_definition="fargate-job-nf_header"
 
 # Copy scripts to S3
