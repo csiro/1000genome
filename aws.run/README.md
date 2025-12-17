@@ -39,14 +39,14 @@ The folder named terraform provides the template to set up cloud infrastructure.
   terraform init
   terraform apply
   ```
-  it will output the resource information which will be used in the next step
+  it will output the resource information which will be used in the step3. Below is an example
   ```
 	Outputs:
 
 	bucket_ouput = "s3://1000genome-wruhmmui"
-	job_definition_bcftool = "arn:aws:batch:us-east-1:041314368896:job-definition/fargate-job-bcftool:6"
-	job_definition_nf = "arn:aws:batch:us-east-1:041314368896:job-definition/fargate-job-nf_header:5"
-	job_definition_pca = "arn:aws:batch:us-east-1:041314368896:job-definition/fargate-job-pca:6"
+	job_definition_bcftool = "arn:aws:batch:us-east-1:...:job-definition/fargate-job-bcftool:6"
+	job_definition_nf = "arn:aws:batch:us-east-1:...:job-definition/fargate-job-nf_header:5"
+	job_definition_pca = "arn:aws:batch:us-east-1:...:job-definition/fargate-job-pca:6"
 	job_queue = "fargate_job_queue"
 	
   ```
