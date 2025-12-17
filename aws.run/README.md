@@ -39,9 +39,21 @@ The folder named terraform provides the template to set up cloud infrastructure.
   terraform init
   terraform apply
   ```
+  it will output the resource information which will be used in the next step
+  ```
+	Outputs:
+
+	bucket_ouput = "s3://1000genome-wruhmmui"
+	job_definition_bcftool = "arn:aws:batch:us-east-1:041314368896:job-definition/fargate-job-bcftool:6"
+	job_definition_nf = "arn:aws:batch:us-east-1:041314368896:job-definition/fargate-job-nf_header:5"
+	job_definition_pca = "arn:aws:batch:us-east-1:041314368896:job-definition/fargate-job-pca:6"
+	job_queue = "fargate_job_queue"
+	
+  ```
+
 - step 3: now you can get aws resource through AWS console or terraform command. eg.
-  - job_definition arn to launch docker container running PCA and bcftool, refer to "scripts/nextflow.config"
-  - name of your private bucket, job_queue and Nextflow head job_definition, refer to "submit.sh"
+	 - job_definition arn to launch docker container running PCA and bcftool, refer to "scripts/nextflow.config"
+  	- name of your private bucket, job_queue and Nextflow head job_definition, refer to "submit.sh"
     
 ## Nextflow Pipeline
 
