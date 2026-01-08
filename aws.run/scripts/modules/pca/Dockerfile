@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y libglib2.0-0 libsm6 libxext6  libxrende
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python packages including awscli on cloud
-RUN pip install --no-cache-dir -U pandas scikit-learn plotly kaleido awscli
+RUN pip install --no-cache-dir -U pandas scikit-learn plotly "kaleido==0.2.1" awscli
 
 # Set working directory (optional)
 WORKDIR /app
