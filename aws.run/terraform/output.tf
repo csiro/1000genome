@@ -22,7 +22,7 @@ output "job_definition_bcftool" {
   value       = module.job_definition_bcftool.job_id
 }
 
-output "bucket_ouput" {
+output "bucket_output" {
   description = "The bucket to store output"
   value       = "s3://${aws_s3_bucket.bucket_1000genome.bucket}"
 }
