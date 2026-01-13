@@ -1,0 +1,78 @@
+
+params {
+    emailto = ${EMAIL}
+
+    year   = new Date().format("yyyy")
+    month  = new Date().format("MM")
+    day    = new Date().format("dd")
+    uuid   = UUID.randomUUID().toString().substring(0, 8) // Short UUID
+    runid  = "run-${params.year}${params.month}${params.day}-${params.uuid}"
+
+    chunk_size = 3000
+    rand_fraction = 0.001
+    maf_interval = "(0.001, 0.5]"
+    reads = "s3://1000genomes/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz"
+    panel = "s3://1000genomes/release/20130502/integrated_call_samples_v3.20130502.ALL.panel"
+    // update the bucket name from terraform output
+    results  = "${AWS_BUCKET}/1000genomes/results/${runid}"
+}
+
+profiles {
+
+    awsbatch {
+        aws.region = ${AWS_REGION}
+        wave.enabled = false
+
+        process {
+		queue = '${BATCH_QUEUE}'
+		executor = 'awsbatch'
+		withLabel: pca {
+			container = 'job-definition://${PCA_JOB_DEFINITION}'
+			cpus = 2
+        		memory = 4.GB
+		}
+		withLabel: bcftool {
+    			container = 'job-definition://${BCFTOOLS_JOB_DEFINITION}'
+			// have to specify both cpus and memory otherwise, the default setting may not match.
+			// fargate 1 vCPU, the minimum memory is 3 GB.
+			cpus = 1
+        		memory = 2.GB
+		}
+	}
+
+
+    }
+    
+    'local' {
+        process.container = "docker://staphb/bcftools:1.21"
+        process.time = '90 min'
+	wave.enabled = true
+	wave.strategy = ['dockerfile','container']
+    }
+
+} 
+
+trace {
+    enabled = true
+    file = "${params.results}/trace.${params.runid}.txt"
+    fields = 'task_id,name,status,exit,realtime,%cpu,rss'
+    overwrite = true
+}
+
+timeline {
+    enabled = true
+    file = "${params.results}/timeline.${params.runid}.html"
+    overwrite = true
+}
+
+report {
+    enabled = true
+    file = "${params.results}/report.${params.runid}.html"
+    overwrite = true
+}
+dag {
+    enabled = true
+    file = "${params.results}/flowchart.${params.runid}.html"
+    overwrite = true
+}
+
