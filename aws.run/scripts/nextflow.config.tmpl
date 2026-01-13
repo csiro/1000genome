@@ -1,6 +1,6 @@
 
 params {
-    emailto = ${EMAIL}
+    emailto = "${EMAIL}"
 
     year   = new Date().format("yyyy")
     month  = new Date().format("MM")
@@ -20,7 +20,7 @@ params {
 profiles {
 
     awsbatch {
-        aws.region = ${AWS_REGION}
+        aws.region = '${AWS_REGION}'
         wave.enabled = false
 
         process {
