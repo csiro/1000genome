@@ -2,9 +2,19 @@
 # output
 #################################################################
 
+output "aws_region" {
+  description = "The aws region for this deployment"
+  value = var.region
+}
+
 output "job_queue" {
   description = "The job queu name"
   value       = aws_batch_job_queue.fargate_job_queue.name
+}
+
+output "job_name_nf" {
+  description = "The job definition name of nexflow head job"
+  value       = module.job_definition_nf.job_name
 }
 
 output "job_definition_nf" {
