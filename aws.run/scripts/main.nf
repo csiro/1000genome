@@ -28,20 +28,26 @@ workflow {
 
 }
 
+
 workflow.onComplete {
+    def summary = [
+        "Pipeline execution summary",
+        "---------------------------",
+        "Completed at : ${workflow.complete}",
+        "Duration     : ${workflow.duration}",
+        "Success      : ${workflow.success}",
+        "Exit status  : ${workflow.exitStatus}",
+        "Work dir     : ${workflow.workDir}",
+        "Run name     : ${workflow.runName}",
+        "Command line : ${workflow.commandLine}",
+        "Results dir  : ${params.results ?: 'not specified'}"
+    ]
 
-    def msg = """\
-        Pipeline execution summary
-        ---------------------------
-        Completed at: ${workflow.complete}
-        Duration    : ${workflow.duration}
-        exit status : ${workflow.exitStatus}
-        Success     : ${workflow.success}
-        Outputs     : ${params.results}
-        """
-        .stripIndent()
+    if (!workflow.success) {
+        summary << "Error report : ${workflow.errorReport ?: 'N/A'}"
+        summary << "Error message: ${workflow.errorMessage ?: 'N/A'}"
+    }
 
-    sendMail(to: '${params.emailto}', subject: 'NF run (${params.runid}) is done', body: msg)
+    println summary.join('\n')
 }
-
 
