@@ -1,6 +1,5 @@
 
 params {
-    emailto = "${EMAIL}"
 
     year   = new Date().format("yyyy")
     month  = new Date().format("MM")
@@ -11,7 +10,7 @@ params {
     chunk_size = 3000
     rand_fraction = 0.001
     maf_interval = "(0.001, 0.5]"
-    reads = "s3://1000genomes/release/20130502/ALL.chr22.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz"
+    reads = "s3://1000genomes/release/20130502/ALL.chr*.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf.gz"
     panel = "s3://1000genomes/release/20130502/integrated_call_samples_v3.20130502.ALL.panel"
     // update the bucket name from terraform output
     results  = "${AWS_BUCKET}/1000genomes/results/${runid}"

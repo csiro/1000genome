@@ -9,11 +9,9 @@ job_definition_bcftool=$(terraform -chdir=./terraform output -raw job_definition
 
 # experiment job setting
 job_name="1000genome-test"
-email_to="xu102@csiro.au"
 
 # Generating fresh nextflow.config
 sed \
-    -e "s|\${EMAIL}|$email_to|g" \
     -e "s|\${AWS_REGION}|$aws_region|g" \
     -e "s|\${AWS_BUCKET}|$bucket|g" \
     -e "s|\${BATCH_QUEUE}|$job_queue|g" \
