@@ -44,7 +44,7 @@ Here, we will demonstrate how to execute the source code from our GitHub repo to
   		...
   ```
 
-- Run Terraform scripts
+- Run Terraform scripts while your local Docker deamon is running
   ```
   git clone https://github.com/csiro/1000genome.git
   cd aws.run/terraform
