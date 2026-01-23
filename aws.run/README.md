@@ -31,9 +31,10 @@ Here, we will demonstrate how to execute the source code from our GitHub repo to
     aws_session_token=IQoJ/...=
   ```
   </Details>
+  
 - Create a Terraform state s3 bucket
-Run the following command to create the Terraform state S3 bucket, you can use any globally-unique valid63
-bucket name. This bucket will store the state of all the AWS resources that will be provisioned by Terraform.
+  
+	Run the command `aws s3 mb s3:://<state bucket>` to create the Terraform state S3 bucket, you can use any globally-unique valid S3 bucket name. This bucket will store the state of all the AWS resources that will be provisioned by Terraform.
 
 - set up terraform state bucket refer to https://developer.hashicorp.com/terraform/language/backend/s3 <BR>
     you can use you exiting bucket or create a new bucket through AWS console, update the bucket information in backend session. 
