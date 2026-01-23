@@ -58,7 +58,7 @@ Here, we will demonstrate how to execute the source code from our GitHub repo to
   ```
 	This will perform the solution overview workflow and copy the scripts needed to run each task to S3 bucket and then launch the head node AWS Batch job, which will subsequently launch new downstream AWS Batch jobs as needed.
     
-## Nextflow Pipeline
+## run nextflow in aws
 
 - update the parameter value within configuration file "./scripts/nextflow.config".
   - "chunk_size": the maximum sample number with each group during "SPLIT_SAMPLE" task
@@ -66,6 +66,12 @@ Here, we will demonstrate how to execute the source code from our GitHub repo to
   - "maf_interval" select variants fallen in the specified interval range.  
   - "container": the task job_definition refer to step 3 of AWS Cloud Infrastructure.   
  
-- Submit Nextflow to cloud
-  - update "submit.sh" following the step3 of  AWS Cloud Infrastructure. Here the Fargate cluster, docker image are already configured within job-queue and job-definition during terraform deployment. 
-  - run `bash ./submit.sh`: it copys the nextflow scripts including configuration file to s3; and then submit Nextflow head job to aws batch. 
+- run NF job to cloud, refer to submit.sh
+  ```
+  aws batch submit-job \
+    --job-name "${job_name}" \
+    --job-queue "${job_queue}" \
+    --job-definition "${job_definition_nf}" \
+    --container-overrides "{\"command\": [\"/bin/bash\", \"-c\", \"mkdir -p /app/scripts && aws s3 cp 		${bucket}/scripts /app/scripts/ --recursive && nextflow run /app/scripts/main.nf -profile \\\"awsbatch\\\" -c /app/scripts/nextflow.config -bucket-dir ${bucket}/1000genomes/work\"]}"
+	```
+ 
