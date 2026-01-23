@@ -16,7 +16,8 @@ Here, we will demonstrate how to execute the source code from our GitHub repo to
 - AWS CLI
 
 ### Instructions
-- set up AWS cloud credential in your local PC. 
+- set up AWS cloud credential in your local PC.
+  <Details>
   ```
   # eg. less ~/.aws/config 
   [default]
@@ -29,6 +30,7 @@ Here, we will demonstrate how to execute the source code from our GitHub repo to
     aws_secret_access_key=1mSq9i0+Vcr...A/u
     aws_session_token=IQoJ/...=
   ```
+  </Details>
 - Create a Terraform state s3 bucket
 Run the following command to create the Terraform state S3 bucket, you can use any globally-unique valid63
 bucket name. This bucket will store the state of all the AWS resources that will be provisioned by Terraform.
