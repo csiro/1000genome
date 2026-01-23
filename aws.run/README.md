@@ -1,5 +1,7 @@
-# Nextflow Pipeline on AWS Fargate
-A Nextflow pipeline is proposed to Examine genomic variation across populations with AWS. Here, both Nextflow head and task jobs are running on AWS Fargate, leveraging Spot instances, and automating infrastructure with Terraform, our approach overcomes the scalability, cost, and speed limitations of prior methods.
+# Serverless Nextflow
+A Nextflow pipeline is proposed to Examine genomic variation across populations with AWS. Here, both Nextflow head and task jobs are running on AWS Fargate, leveraging Spot instances, and automating infrastructure with Terraform, our approach overcomes the scalability, cost, and speed limitations of prior methods. The following diagram illustrates the how we orchestrate and run genomic variant analyses as Nextflow jobs using AWS Fargate, AWS Batch, and Amazon S3.
+
+![Diagram](aws.solution.jpg)
 
 ## AWS Cloud Infrasture
 The folder named terraform provides the template to set up cloud infrastructure. 
