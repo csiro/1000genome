@@ -34,44 +34,29 @@ Here, we will demonstrate how to execute the source code from our GitHub repo to
   
 - Create a Terraform state s3 bucket
   
-	Run the command `aws s3 mb s3:://<state bucket>` to create the Terraform state S3 bucket, you can use any globally-unique valid S3 bucket name. This bucket will store the state of all the AWS resources that will be provisioned by Terraform.
+	Run the command `aws s3 mb s3:://<state_bucket_name>` to create the Terraform state S3 bucket, you can use any globally-unique valid S3 bucket name. This bucket will store the state of all the AWS resources that will be provisioned by Terraform.
 
-- set up terraform state bucket refer to https://developer.hashicorp.com/terraform/language/backend/s3 <BR>
-    you can use you exiting bucket or create a new bucket through AWS console, update the bucket information in backend session. 
-	```
-	# aws.run/terraform/main.tf
-     	terraform {
-	  backend "s3" {
-    		# update following as needed
-		bucket         = "you-state-bucket-name"
-    		key            = "you-key-name"
-    		region         = "you-state-bucket-region"
-	
-  		}
-	}
-	
-	```
-- step 2: Run Terraform to set up cloud infrastructure.  It will access your local Docker daemon, so ensure it is turn on.
+- Update the state bucket name in aws.run/terraform/main.tf
   ```
-  cd ./aws.run/terraform
+  terraform {
+  	backend "s3" {
+  		bucket = <state_bucket_name>
+  		...
+  ```
+
+- Run Terraform scripts
+  ```
+  git clone https://github.com/csiro/1000genome.git
+  cd aws.run/terraform
   terraform init
   terraform apply
   ```
-  it will output the resource information which will be used in the step3. Below is an example
-  ```
-	Outputs:
 
-	bucket_ouput = "s3://1000genome-wruhmmui"
-	job_definition_bcftool = "arn:aws:batch:us-east-1:...:job-definition/fargate-job-bcftool:6"
-	job_definition_nf = "arn:aws:batch:us-east-1:...:job-definition/fargate-job-nf_header:5"
-	job_definition_pca = "arn:aws:batch:us-east-1:...:job-definition/fargate-job-pca:6"
-	job_queue = "fargate_job_queue"
-	
+- Run the aws.run/submit.sh
   ```
-
-- step 3: now you can get aws resource through AWS console or terraform command as step2 described. eg.
-	 - job_definition arn to launch docker container running PCA and bcftool, refer to "scripts/nextflow.config"
-  	- name of your private bucket, job_queue and Nextflow head job_definition, refer to "submit.sh"
+  cd aws.run && bash submit.sh
+  ```
+	This will perform the solution overview workflow and copy the scripts needed to run each task to S3 bucket and then launch the head node AWS Batch job, which will subsequently launch new downstream AWS Batch jobs as needed.
     
 ## Nextflow Pipeline
 
