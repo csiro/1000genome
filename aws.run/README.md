@@ -1,12 +1,22 @@
 # Serverless Nextflow
-A Nextflow pipeline is proposed to Examine genomic variation across populations with AWS. Here, both Nextflow head and task jobs are running on AWS Fargate, leveraging Spot instances, and automating infrastructure with Terraform, our approach overcomes the scalability, cost, and speed limitations of prior methods. The following diagram illustrates the how we orchestrate and run genomic variant analyses as Nextflow jobs using AWS Fargate, AWS Batch, and Amazon S3.
+A Nextflow pipeline is proposed to Examine genomic variation across populations with AWS. Here, both Nextflow head and task jobs are running on AWS Fargate, leveraging Spot instances, and automating infrastructure with Terraform, our approach overcomes the scalability, cost, and speed limitations of prior methods. 
+
+## Solution Overview
+The following diagram illustrates the how we orchestrate and run genomic variant analyses as Nextflow jobs using AWS Fargate, AWS Batch, and Amazon S3.
 
 | <img src="aws.solution.jpg" width="600" height="600"> |
 
-## AWS Cloud Infrasture
-The folder named terraform provides the template to set up cloud infrastructure. 
-- step 1: Prerequisites 
-   - set up AWS cloud credential in your local PC. 
+## Deployment
+Here, we will demonstrate how to execute the source code from our GitHub repo to AWS cloud. 
+
+### Prerequisites 
+- Git
+- Docker
+- Terraform
+- AWS CLI
+
+### Instructions
+- set up AWS cloud credential in your local PC. 
   ```
   # eg. less ~/.aws/config 
   [default]
@@ -19,8 +29,11 @@ The folder named terraform provides the template to set up cloud infrastructure.
     aws_secret_access_key=1mSq9i0+Vcr...A/u
     aws_session_token=IQoJ/...=
   ```
+- Create a Terraform state s3 bucket
+Run the following command to create the Terraform state S3 bucket, you can use any globally-unique valid63
+bucket name. This bucket will store the state of all the AWS resources that will be provisioned by Terraform.
 
-   - set up terraform state bucket refer to https://developer.hashicorp.com/terraform/language/backend/s3 <BR>
+- set up terraform state bucket refer to https://developer.hashicorp.com/terraform/language/backend/s3 <BR>
     you can use you exiting bucket or create a new bucket through AWS console, update the bucket information in backend session. 
 	```
 	# aws.run/terraform/main.tf
