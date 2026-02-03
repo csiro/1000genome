@@ -123,6 +123,7 @@ By the end, you’ll have a working pipeline and the confidence to build more. I
 
 ### Container Practice
 <Details>
+ 
 - rm local bcftools: eg. `which bcftools; mv /opt/homebrew/bin/bcftools /opt/homebrew/bin/bcftools.bk`
 - check docker deamon is on: eg. `nextflow run hello -with-docker`
 - set on nextflow.config: `docker.enabled=true` and `runOptions = "--platform linux/amd64"` if on mac
